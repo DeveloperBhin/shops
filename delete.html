@@ -1,0 +1,6 @@
+<h1 style="color:red;">Are you sure you want to delete the note: "{{ qs.id }}"?</h1>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Yes, Delete</button>
+    <a href="{% url 'Adminhomepage' %}"><button class="btn btn-primary" >Cancel</button></a>
+</form>

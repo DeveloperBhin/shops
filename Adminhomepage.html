@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>Push Menu with Slide Dropdown</title>
+
+  <style>
+    :root {
+      --primary-bg: #D9D9D9;
+      --secondary-bg: #CDC2A5;
+      --primary-color: darkorange;
+      --hover-bg: #310202;
+      --sidebar-bg: #155B7A;
+      --footer-bg: #ffffff;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #D9D9D9;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .container-fluid, .header, .footer {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .header {
+      background-color: #D9D9D9;
+      padding: 5px 0;
+      box-shadow: 2px 2px 2px 2px solid black;
+    }
+    .nav-item button {
+      background-color: #D9D9D9;
+      border: none;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease; /* Transition for hover effect */
+    }
+    .nav-link {
+      color: white;
+      padding: 10px 15px;
+      display: block;
+      text-decoration: none;
+    }
+    .nav-link:hover {
+      color: #f3f3f3;
+    }
+    .nav-item button:hover {
+      background-color: #310202; 
+    }
+
+   
+   
+   
+    .footer {
+      background-color:white;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+    .footer a {
+      color: black;
+      text-decoration: none;
+    }
+
+    /* Push menu styles */
+   
+   
+     /* Push menu styles */
+     .push-menu {
+      position: absolute;
+      top: 60px; /* Place after header */
+      left: -250px; /* Initially hidden */
+      width: 250px;
+      height: calc(100vh - 60px); /* Full height except header */
+      background-color: #155B7A; /* Red background */
+      color: white;
+      transition: left 0.3s ease;
+      z-index: 100; /* Ensure it appears above content */
+    }
+    .push-menu.active {
+      left: 0; /* Show the sidebar */
+    }
+    .main-content {
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+    }
+    .main-content.shifted {
+      margin-left: 250px; /* Shift content when sidebar is active */
+    }
+    .menu-toggle {
+      cursor: pointer;
+      background-color: #155B7A;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-left: 15px;
+      z-index: 1000;
+    }
+    .product-container {
+        background-color: #155B7A;
+        border: 4px solid #D9D9D9;
+        margin-bottom: 10px;
+    }
+    .product-container img {
+        padding: 5px;
+        width: 100%;
+        height:130px; /* Ensure the image fills the container */
+        border-radius: 5px;
+    }
+    .no-underline {
+        text-decoration: none;
+    }
+
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 d-flex align-items-center">
+          <!-- Button to toggle push menu -->
+         <div class="col-6">
+          <h4 class="ms-3" style="color: var(--primary-color);">Tunatrade</h4>
+        </div>
+          <nav>
+            <ul class="nav">
+              <li class="nav-item"><button><a class="nav-link" href="{%url 'index'%}">Home</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="{%url 'Adminhomepage'%}">Admin Home</a></button></li>
+            
+        
+            
+              <li class="nav-item"><button><a class="nav-link" href="{% url 'networkform' %}">Need to pay?</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="#">About Us</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="#">Contact Us</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="{% url 'loginpage' %}">Login</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="{% url 'logout' %}">Logout</a></button></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  
+    <nav>
+      <ul class="nav d-flex"style="background-color: #CDC2A5;button:hover;" >
+        <li class="nav-item"id="hov1"><button><a class="nav-link"style="background-color: #CDC2A5;button:hover;" href="">Buyer Site</a></button></li>
+        <li class="nav-item"id="hov1"><button><a class="nav-link"style="background-color: #CDC2A5;button:hover;" href="{% url 'sellerpage' %}">Seller Site</a></button></li>
+       
+        
+      </ul>
+    </nav>
+
+    </div>
+    <div class="col">
+    <div class="row">
+       
+          <div class="col-md" style="background-color:#CDC2A5; border:5px solid#D9D9D9;;">
+          <div class="row" style="padding:5px;">
+            <div class="col-md-6 product-container" style="padding:5px;">
+                <div class="d-flex justify-content-center align-items-center" style="width: 100%;  padding:5px;">
+                    <a class="no-underline text-white" href="{% url 'userdetail' %}">
+                        <img src="{{ image6.Image.url }}" alt="Airtel Pay" style="width: 100%;  object-fit: contain;">
+                    <p>Manage User</p>
+                    </a>
+                </div>
+            </div>
+            
+            
+            <div class="col-md-6 product-container" style="padding:5px;">
+                <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 200px; padding:5px;">
+                    <a class="no-underline text-white" href="{% url 'Fashionseller' %}">
+                        <img src="{{ image5.Image.url }}" alt="Airtel Pay" style="width: 100%;  object-fit: contain;">
+                        <p>Manage Seller</p></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row"  style="padding:5px;">
+            <div class="col-md-6 product-container" style="padding:5px;">
+                <div class="d-flex justify-content-center align-items-center" style="width: 100%; height: 200px; padding:5px;">
+                    <a class="no-underline text-white" href="{% url 'CartAdminshow' %}">
+                        <img src="{{ image7.Image.url }}" alt="Airtel Pay" style="width: 100%;  object-fit: contain;">
+                        <p>Manage Buyer</p></a>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+    
+        
+</div>
+</div>
+
+
+
+ 
+   
+
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <p>Related links</p>
+          <a href="https://maps.app.goo.gl/zSqETo1k79DFD5Up8">Uhuru, Dar es Salaam, Tanzania</a>
+          <p><a href="https://maps.app.goo.gl/ZnHNa9F8kcqhinY36">Mbezi Beach Rafia, Kituo Kipya, Dar es Salaam</a></p>
+        </div>
+        <div class="col-md-6 text-center"style=" color:black;">
+          <p>Social media</p>
+          <p>Email: mhdqualitycarpet@gmail.com</p>
+          <p>Call/WhatsApp: 0719363640</p>
+        </div>
+      </div>
+      <p>&copy; 2024 MHD. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and Custom Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Toggle push menu
+    const toggleButton = document.querySelector('.menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+
+    toggleButton.addEventListener('click', function() {
+      sidebar.classList.toggle('active'); // Show/hide sidebar
+      mainContent.classList.toggle('shifted'); // Shift content
+    });
+
+    // Toggle the sliding dropdown
+    const postButton = document.getElementById('postButton');
+    const postDropdown = document.getElementById('postDropdown');
+
+    postButton.addEventListener('click', function() {
+      postDropdown.classList.toggle('show'); // Toggle slide effect by adding/removing class
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+

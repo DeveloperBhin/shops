@@ -1,0 +1,8 @@
+<h2>Your cart</h2>
+<ul>
+    {% for item in cart_items %}
+    <li>
+        {{item.product.Name}}-{{item.quantity}}*{{item.price}}={{item.quantity|floatformat:2|multiply:item.price|floatformat:2}}
+    </li>
+    {% endfor%}
+</ul>

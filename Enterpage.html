@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOME | Tunatrade</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <style>
+    /* Root variables for consistent styling */
+    :root {
+      --primary-bg: #D9D9D9;
+      --secondary-bg: #CDC2A5;
+      --primary-color: darkorange;
+      --hover-bg: #310202;
+      --sidebar-bg: #155B7A;
+      --footer-bg: #ffffff;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background-color: var(--primary-bg);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      background-color: var(--primary-bg);
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      padding: 10px 0;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 10px 15px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #f3f3f3;
+    }
+
+    .nav-item button {
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .nav-item button:hover {
+      background-color: var(--hover-bg);
+    }
+
+    .push-menu {
+      position: fixed;
+      top: 60px;
+      left: -250px;
+      width: 250px;
+      height: calc(100vh - 60px);
+      background-color: var(--sidebar-bg);
+      color: white;
+      transition: left 0.3s ease;
+      z-index: 1050;
+    }
+
+    .push-menu.active {
+      left: 0;
+    }
+
+    .menu-toggle {
+      cursor: pointer;
+      background-color: var(--sidebar-bg);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin-left: 15px;
+      font-size: 18px;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      transition: margin-left 0.3s ease;
+    }
+
+    .main-content.shifted {
+      margin-left: 250px;
+    }
+
+    .footer {
+      background-color: var(--footer-bg);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .footer a {
+      color: black;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    .card img {
+      height: 400px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .category-links a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+    }
+
+    .category-links a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .carousel-inner img {
+      height: 40vh; /* Adjust this value as needed */
+      width: 40%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  
+      a.no-underline {
+          text-decoration: none; /* Removes the underline */
+      }
+    
+
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-6">
+          <h4 class="ms-3" style="color: var(--primary-color);">Tunatrade</h4>
+        </div>
+        <div class="col-6">
+          <nav>
+            <ul class="nav justify-content-end">
+              <li class="nav-item"><button><a class="nav-link" href="{% url 'index' %}">Home</a></button></li>
+            
+              <li class="nav-item"><button><a class="nav-link" href="{% url 'networkform' %}">Need to pay?</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="#">About Us</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="#">Contact Us</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="{% url 'loginpage' %}">Login</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="{% url 'logout' %}">Logout</a></button></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+ </header>
+ <div>
+  <nav class="navbar navbar-expand-lg" style="background-color: #CDC2A5;">
+    <div class="container-fluid">
+      <!-- Menu Toggle -->
+      <button class="menu-toggle btn" style="font-size: 20px;">☰</button>
+      
+      <!-- Navigation Links -->
+      <ul class="navbar-nav d-flex align-items-center">
+        <li class="nav-item">
+          <button class="btn border-0" style="background-color: #CDC2A5;">
+            <a class="nav-link text-decoration-none" href="{% url 'buyersite' %}">Buyer Site</a>
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="btn border-0" style="background-color: #CDC2A5;">
+            <a class="nav-link text-decoration-none" href="{% url 'sellersite' %}">Seller Site</a>
+          </button>
+        </li>
+      </ul>
+
+      <!-- Search Box -->
+      <form action="{% url 'entertainmentbrand' %}" method="POST" class="d-flex ms-auto">
+        {% csrf_token %}
+        <input type="text" name="searched" class="form-control me-2" placeholder="Search for products">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
+
+      <!-- Right-Aligned Images -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="{% url 'Cartdetailed' %}">
+            <img src="{{ image1.Image.url }}" class="img-fluid" style="width: 30px;" alt="Cart">
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'loginpage' %}">
+            <img src="{{ image0.Image.url }}" class="img-fluid" style="width: 30px;" alt="Login">
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+  <!-- Sidebar -->
+ 
+  
+  <div class="push-menu" id="sidebar">
+    <div class="py-4">
+      <h5 class="text-center">All Categories</h5>
+      <div class="category-links">
+        <a href="{% url 'Fashionp' %}">Fashion</a>
+        <a href="{% url 'Industrialpage' %}">Industrial Products</a>
+        <a href="{% url 'Healthpage' %}">Health Products</a>
+        <a href="{% url 'Homepage' %}">Home Decor</a>
+        <a href="{% url 'Sportpage' %}">Sports</a>
+        <a href="{% url 'Enterpage' %}">Entertainment</a>
+        <a href="{% url 'Shoepage' %}">Shoes</a>
+        <a href="{% url 'Luggagepage' %}">Luggage & Bags</a>
+        <a href="{% url 'Watchpage' %}">Watches & Jewelry</a>
+        <a href="{% url 'Kidspage' %}">Kids & Toys</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+   
+
+
+
+<!-- Main Content -->
+
+<div class="container-fluid">
+  <div class="row justify-content-center my-4">
+    {% for sales in sel1 %}
+    <div class="col-md-4 mb-4">
+      <a href= "{% url 'enterdetail' sales.id %}"class="card-link">
+        <div class="card bg-light">
+          <img src="{{ sales.Image.url }}" alt="{{ sales.Brand }} Image" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{ sales.Brand }}</h5>
+            <p class="card-text">Price: {{ sales.Price }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</main>
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <p>Related links</p>
+          <a href="https://maps.app.goo.gl/zSqETo1k79DFD5Up8">Uhuru, Dar es Salaam, Tanzania</a>
+          <p><a href="https://maps.app.goo.gl/ZnHNa9F8kcqhinY36">Mbezi Beach Rafia, Kituo Kipya, Dar es Salaam</a></p>
+        </div>
+        <div class="col-md-6 text-center"style=" color:black;">
+          <p>Social media</p>
+          <p>Email: mhdqualitycarpet@gmail.com</p>
+          <p>Call/WhatsApp: 0719363640</p>
+        </div>
+      </div>
+      <p>&copy; 2024 MHD. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and Custom Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Toggle push menu
+    const toggleButton = document.querySelector('.menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+
+    toggleButton.addEventListener('click', function() {
+      sidebar.classList.toggle('active'); // Show/hide sidebar
+      mainContent.classList.toggle('shifted'); // Shift content
+    });
+
+    // Toggle the sliding dropdown
+    const postButton = document.getElementById('postButton');
+    const postDropdown = document.getElementById('postDropdown');
+
+    postButton.addEventListener('click', function() {
+      postDropdown.classList.toggle('show'); // Toggle slide effect by adding/removing class
+    });
+  </script>
+</body>
+</html>

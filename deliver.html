@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>HOME</title>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #D9D9D9;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .container-fluid, .header, .footer {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .header {
+      background-color: #D9D9D9;
+      padding: 5px 0;
+      box-shadow: 2px 2px 2px 2px solid black;
+    }
+    .nav-item button {
+      background-color: #D9D9D9;
+      border: none;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease; /* Transition for hover effect */
+    }
+    .nav-link {
+      color: white;
+      padding: 10px 15px;
+      display: block;
+      text-decoration: none;
+    }
+    .nav-link:hover {
+      color: #f3f3f3;
+    }
+    .nav-item button:hover {
+      background-color: #310202; 
+    }
+
+   
+   
+   
+    .footer {
+      background-color:white;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+    .footer a {
+      color: black;
+      text-decoration: none;
+    }
+
+    /* Push menu styles */
+    .push-menu {
+      position: absolute;
+      top: 60px; /* Place after header */
+      left: -250px; /* Initially hidden */
+      width: 250px;
+      height: calc(100vh - 60px); /* Full height except header */
+      background-color: #155B7A; /* Red background */
+      color: white;
+      transition: left 0.3s ease;
+      z-index: 100; /* Ensure it appears above content */
+    }
+    .push-menu.active {
+      left: 0; /* Show the sidebar */
+    }
+    .main-content {
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+    }
+    .main-content.shifted {
+      margin-left: 250px; /* Shift content when sidebar is active */
+    }
+    .menu-toggle {
+      cursor: pointer;
+      background-color: #155B7A;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-left: 15px;
+      z-index: 1000;
+    }
+
+ 
+    .carousel-inner img {
+      height: 40vh; /* Adjust this value as needed */
+      width: 40%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+  }
+  
+  @keyframes fadeInOutwards {
+      0%{
+          transform: scale(1.5);
+          opacity: 0;
+      }
+      50%{
+          transform: scale(1.2);
+          opacity:0.5;
+      }
+      100%{
+          transform: scale(1);
+          opacity:1;
+      }
+    }
+
+
+  
+
+  </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-12 d-flex align-items-center">
+              <!-- Button to toggle push menu -->
+              <h4 style=" margin-left: 15px; color:darkorange;">Tunatrade        </h4>
+              <nav>
+                <ul class="nav">
+                  <li class="nav-item"><button><a class="nav-link" href="{%url 'index'%}">Home</a></button></li>
+                  <li class="nav-item"><button><a class="nav-link" href="">Available Companies</a></button></li>
+                  <li class="nav-item"><button><a class="nav-link" href="{% url 'networkform' %}">Need to pay?</a></button></li>
+                  <li class="nav-item"><button><a class="nav-link" href="">About Us</a></button></li>
+                  <li class="nav-item"><button><a class="nav-link" href="">Contact Us</a></button></li>
+                  <li class="nav-item"><button><a class="nav-link" href="{%url 'loginpage'%}">Login</a></button></li>
+                  <li class="nav-item"><button><a class="nav-link" href="{%url 'logout'%}">logout</a></button></li></ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div>
+        <nav>
+          <ul class="nav d-flex align-items-center" style="background-color: #CDC2A5;">
+            <!-- Buyer Site Button -->
+            <li class="nav-item">
+              <button class="btn border-0" style="background-color: #CDC2A5;">
+                <a class="nav-link text-decoration-none" href="{% url 'buyersite' %}">Buyer Site</a>
+              </button>
+            </li>
+      
+            <!-- Seller Site Button -->
+            <li class="nav-item">
+              <button class="btn border-0" style="background-color: #CDC2A5;">
+                <a class="nav-link text-decoration-none" href="{% url 'sellersite' %}">Seller Site</a>
+              </button>
+          </li>
+       
+          <li class="nav-item">
+            <button class="btn border-0" style="background-color: #CDC2A5;">
+              <a class="no-underline" href="{% url 'Cartdetailed' %}">
+               
+                <img src="{{ image1.Image.url }}" style="width: 5%; margin-left:95%;" alt="Image 1"/>
+            
+          </a>
+            </button>
+       
+           
+      </li>
+      <li class="nav-item">
+        <button class="btn border-0" style="background-color: #CDC2A5;">
+          <a class="no-underline" href="{%url 'loginpage'%}">
+           
+            <img src="{{ image0.Image.url }}" style="width: 5%; margin-left:90%;" alt="Image 1"/>
+        
+      </a>
+        </button>
+    
+       
+    </li>
+    
+      
+        
+        </ul>
+            </nav>
+      
+            <!-- Right-Aligned Images -->
+           
+           
+           
+      </div>
+      
+  <!-- Push Menu (Sidebar) placed after header -->
+   <div class="col">
+  <div class="row">
+   
+    <form action="{% url 'CartAdmin'%}" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+   
+      <div class="container d-flex flex-column align-items-center" >
+        <!-- First Product -->
+     
+        <div class="d-flex flex-column align-items-center" 
+             style="background-color: #ffffff; padding: 10px; border: 1px solid #ccc; border-radius: 10px; border:1px solid black;">
+             <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%; background-color:#CDC2A5">
+              Thank you!!  {{ sel.First_name|upper }}</p>
+              <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%; color:green;">your order is confirmed please make payment!
+
+              </p>
+          <img src="{{ sel1.Image }}" style="width: 30%; height: auto; object-fit: cover; border-radius: 5px;">
+          <input type="hidden" name="Image" value="{{ sel1.Image }}"> 
+          <div class="row">
+            <div class="col-md-6">
+              <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                <strong>Name:</strong>  {{ sel1.Name }}</p>
+                <input type="Hidden"  value="{{ sel1.Name }}" name="Name">
+              <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                <strong>Brand:</strong> {{ sel1.Brand }}</p>
+                <input type="Hidden"  value="{{ sel1.Brand }}" name="Brand">
+              <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                <strong>Status:</strong> {{ sel1.Status }}</p>
+                <input type="Hidden"  value="{{ sel1.Status }}" name="Status">
+            </div>
+            <div class="col-md-6">
+              <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                <strong>Price:</strong> {{ sel1.Price }}</p>
+                <input type="Hidden"  value="{{ sel1.Price }}" name="Price">
+              <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                <strong>Quantity:</strong> {{ sel1.quantity }}</p>
+                <input type="Hidden"  value="{{ sel1.quantity }}" name="quantity">
+                </div>
+                </div>
+                <div class="row">
+              <div class="col-md-6">
+                    <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                     <strong>Region:</strong>{{ sel.Region }}</p>
+                     <input type="Hidden"  value="{{ sel.Region }}" name="Region">
+                    <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                        <strong>District:</strong> {{ sel.District }}</p>
+                        <input type="Hidden"  value="{{ sel.District }}" name="District">
+                    <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                        <strong>Ward:</strong>{{ sel.Ward }}</p>
+                        <input type="Hidden"  value="{{ sel.Ward }}" name="Ward">
+                  <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                    <strong>Phone:</strong>{{ sel.Phone }}</p>
+                    <input type="Hidden"  value="{{ sel.Phone }}" name="Phone">
+                    <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                        <strong>Contact_name:</strong> {{ sel.Contact_name }}</p>
+                        <input type="Hidden"  value="{{ sel.Contact_name }}" name="Contact_name">
+                      </div>
+                      <div class="col-md-6">
+                   <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                    <strong>First_name:</strong>{{ sel.First_name }}</p>
+                    <input type="Hidden"  value="{{ sel.First_name }}" name="First_name">
+                  <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                    <strong>last_name:</strong> {{ sel.last_name }}</p>
+                    <input type="Hidden"  value="{{ sel.last_name }}" name="last_name">
+                    <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                        <strong>House_no:</strong>{{ sel.House_no }}</p>
+                        <input type="Hidden"  value="{{ sel.House_no }}" name="House_no">
+                  
+                    <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                        <strong>Email:</strong>{{ sel.Email}}</p>
+                        <input type="Hidden"  value="{{ sel.Email }}" name="Email">
+                     
+                   
+
+               
+                <button class="btn btn-primary" type="submit">Payment</button> 
+            </div>
+        </div>
+            </div>
+          </div>
+        </form>
+        </div>
+      
+            </div>
+           
+            </div>
+        
+          
+     
+  </div>
+
+
+ 
+    
+    
+                  
+   
+
+
+
+
+
+
+
+
+          
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <p>Related links</p>
+          <a href="https://maps.app.goo.gl/zSqETo1k79DFD5Up8">Uhuru, Dar es Salaam, Tanzania</a>
+          <p><a href="https://maps.app.goo.gl/ZnHNa9F8kcqhinY36">Mbezi Beach Rafia, Kituo Kipya, Dar es Salaam</a></p>
+        </div>
+        <div class="col-md-6 text-center"style=" color:black;">
+          <p>Social media</p>
+          <p>Email: mhdqualitycarpet@gmail.com</p>
+          <p>Call/WhatsApp: 0719363640</p>
+        </div>
+      </div>
+      <p>&copy; 2024 MHD. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and Custom Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Toggle push menu
+    const toggleButton = document.querySelector('.menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+
+    toggleButton.addEventListener('click', function() {
+      sidebar.classList.toggle('active'); // Show/hide sidebar
+      mainContent.classList.toggle('shifted'); // Shift content
+    });
+
+    // Toggle the sliding dropdown
+    const postButton = document.getElementById('postButton');
+    const postDropdown = document.getElementById('postDropdown');
+
+    postButton.addEventListener('click', function() {
+      postDropdown.classList.toggle('show'); // Toggle slide effect by adding/removing class
+    });
+  </script>
+</body>
+</html>

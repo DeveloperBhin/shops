@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <title>Push Menu with Slide Dropdown</title>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #D9D9D9;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .container-fluid, .header, .footer {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+    .header {
+      background-color: #D9D9D9;
+      padding: 5px 0;
+      box-shadow: 2px 2px 2px 2px solid black;
+    }
+    .nav-item button {
+      background-color: #D9D9D9;
+      border: none;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease; /* Transition for hover effect */
+    }
+    .nav-link {
+      color: white;
+      padding: 10px 15px;
+      display: block;
+      text-decoration: none;
+    }
+    .nav-link:hover {
+      color: #f3f3f3;
+    }
+    .nav-item button:hover {
+      background-color: #310202; 
+    }
+
+   
+   
+   
+    .footer {
+      background-color:white;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: auto;
+    }
+    .footer a {
+      color: black;
+      text-decoration: none;
+    }
+
+    /* Push menu styles */
+   
+   
+     /* Push menu styles */
+     .push-menu {
+      position: absolute;
+      top: 60px; /* Place after header */
+      left: -250px; /* Initially hidden */
+      width: 250px;
+      height: calc(100vh - 60px); /* Full height except header */
+      background-color: #155B7A; /* Red background */
+      color: white;
+      transition: left 0.3s ease;
+      z-index: 100; /* Ensure it appears above content */
+    }
+    .push-menu.active {
+      left: 0; /* Show the sidebar */
+    }
+    .main-content {
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+    }
+    .main-content.shifted {
+      margin-left: 250px; /* Shift content when sidebar is active */
+    }
+    .menu-toggle {
+      cursor: pointer;
+      background-color: #155B7A;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-left: 15px;
+      z-index: 1000;
+    }
+
+
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 d-flex align-items-center">
+          <!-- Button to toggle push menu -->
+          <h4 style=" margin-left: 15px; color:darkorange;">Tunatrade        </h4>
+          <nav>
+            <ul class="nav">
+              <li class="nav-item"><button><a class="nav-link" href="{%url 'index'%}">Home</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="">Available Companies</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="{% url 'networkform' %}">Need to pay?</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="">About Us</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="">Contact Us</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="{%url 'loginpage'%}">Login</a></button></li>
+              <li class="nav-item"><button><a class="nav-link" href="{%url 'logout'%}">logout</a></button></li></ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div>
+    <nav>
+      <ul class="nav d-flex align-items-center" style="background-color: #CDC2A5;">
+        <!-- Buyer Site Button -->
+        <li class="nav-item">
+          <button class="btn border-0" style="background-color: #CDC2A5;">
+            <a class="nav-link text-decoration-none" href="{% url 'buyersite' %}">Buyer Site</a>
+          </button>
+        </li>
+  
+        <!-- Seller Site Button -->
+        <li class="nav-item">
+          <button class="btn border-0" style="background-color: #CDC2A5;">
+            <a class="nav-link text-decoration-none" href="{% url 'sellersite' %}">Seller Site</a>
+          </button>
+      </li>
+   
+      <li class="nav-item">
+        <button class="btn border-0" style="background-color: #CDC2A5;">
+          <a class="no-underline" href="{% url 'Cartdetailed' %}">
+           
+            <img src="{{ image1.Image.url }}" style="width: 5%; margin-left:95%;" alt="Image 1"/>
+        
+      </a>
+        </button>
+   
+       
+  </li>
+  <li class="nav-item">
+    <button class="btn border-0" style="background-color: #CDC2A5;">
+      <a class="no-underline" href="{%url 'loginpage'%}">
+       
+        <img src="{{ image0.Image.url }}" style="width: 5%; margin-left:90%;" alt="Image 1"/>
+    
+  </a>
+    </button>
+
+   
+</li>
+
+  
+    
+    </ul>
+        </nav>
+  
+        <!-- Right-Aligned Images -->
+       
+       
+       
+  </div>
+  
+    <div class="col">
+    <div class="row">
+      
+     
+     
+      
+
+        <div class="container d-flex justify-content-center align-items-center ">
+            <form class="p-4 rounded" style="color:black; font-size: 20px; width: 100%; max-width: 600px;" method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+               
+        
+                <div class="d-flex flex-column align-items-center" 
+                     style="background-color: #ffffff; padding: 10px; border: 1px solid #ccc; border-radius: 10px; border:1px solid black;">
+                   
+                    <button class="menu-toggle text-center " style="font-size:12px;"> your pproduct details << </button> 
+                    <div class="push-menu" id="sidebar">
+                      <div class="py-4">
+                        
+                        <div class="mb-4">
+                          <div class="d-flex flex-column align-items-center" 
+                          style=" padding: 10px;  border-radius: 10px; font-size:14px;">
+                       <!-- Form fields -->
+          <img src="{{ sel1.Image }}" style="width: 30%; height: auto; object-fit: cover; border-radius: 5px;">
+          <div class="row">
+            
+              <p  style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                <strong>Name:</strong> {{ sel1.Name }}</p>
+              <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                <strong>Brand:</strong> {{ sel1.Brand }}</p>
+              <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                <strong>Status:</strong> {{ sel1.Status }}</p>
+            
+            
+              <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                <strong>Quantity:</strong> {{ sel1.Price }}</p>
+              <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                <strong>Quantity:</strong> {{ sel1.quantity }}</p>
+                    
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                      </div>
+                    
+                    <p class="text-center me-auto">DELIVERY</p>
+                    <div class="row">
+                        <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                            Region:<br> {{ form.Region }}
+                        </p>
+                        <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                            District:<br> {{ form.District }}
+                        </p>
+                        <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                            Ward:<br> {{ form.Ward }}
+                        </p>
+                        <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                            Phone:<br> {{ form.Phone }}
+                        </p>
+                        <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                            Contact Name:<br> {{ form.Contact_name }}
+                        </p>
+                        <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                          First name:<br> {{ form.First_name }}
+                      </p>
+                      <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                       Last name :<br> {{ form.last_name }}
+                    </p>
+                      
+                        <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                            House no:<br> {{ form.House_no }}
+                        </p>
+                        <p style="margin-top: 10px; padding: 10px; border-radius: 5px; width: 100%;">
+                          Email:<br> {{ form.Email }}
+                      </p>
+                      <input type="hidden" name="cart_item_id" value="{{ cart_item.id }}">  <!-- CartItems ID -->
+    
+                    </div>
+                    <div class="db mt-3">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                </div>
+            </form>
+        </div>
+        
+</div>
+</div>
+
+
+
+ 
+   
+
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <p>Related links</p>
+          <a href="https://maps.app.goo.gl/zSqETo1k79DFD5Up8">Uhuru, Dar es Salaam, Tanzania</a>
+          <p><a href="https://maps.app.goo.gl/ZnHNa9F8kcqhinY36">Mbezi Beach Rafia, Kituo Kipya, Dar es Salaam</a></p>
+        </div>
+        <div class="col-md-6 text-center"style=" color:black;">
+          <p>Social media</p>
+          <p>Email: mhdqualitycarpet@gmail.com</p>
+          <p>Call/WhatsApp: 0719363640</p>
+        </div>
+      </div>
+      <p>&copy; 2024 MHD. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS and Custom Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Toggle push menu
+    const toggleButton = document.querySelector('.menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+
+    toggleButton.addEventListener('click', function() {
+      sidebar.classList.toggle('active'); // Show/hide sidebar
+      mainContent.classList.toggle('shifted'); // Shift content
+    });
+
+    // Toggle the sliding dropdown
+    const postButton = document.getElementById('postButton');
+    const postDropdown = document.getElementById('postDropdown');
+
+    postButton.addEventListener('click', function() {
+      postDropdown.classList.toggle('show'); // Toggle slide effect by adding/removing class
+    });
+  </script>
+</body>
+</html>
